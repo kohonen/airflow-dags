@@ -24,7 +24,7 @@ slack_msg="AHOJ"
 slack_notify =  SlackWebhookOperator(
     task_id='slack_notify',
     http_conn_id='slack_connection',
-    webhook_token='T0ABU3TUZ/B6CS9G4FK/W0zhCF783PcDLb0VezElnoqK',
+    webhook_token='T0ABZ/BoqK',
     message=slack_msg,
     channel='#webhook-default',
     username='airflow',
@@ -40,9 +40,9 @@ export = MySqlToGoogleCloudStorageOperator(
     task_id='extract_tbloffers',
     mysql_conn_id='mysql_1111',
     google_cloud_storage_conn_id='google_cloud_storage_default',
-    sql='SELECT * FROM profesia_test.tblOffers where offer_id > $COUNTER order by offer_id asc limit 1000  ',
+    sql='SELECT * FROM xxxxx_test.tblOffers where offer_id > $COUNTER order by offer_id asc limit 1000  ',
 
-    bucket='nada-test-profesia-data',
+    bucket='nada-test-xxxxx-data',
     filename='palo/tbloffers2.json',
     schema_filename='palo/schemas/tbloffers2.json',
     dag=dag)
@@ -52,14 +52,14 @@ load = GoogleCloudStorageToBigQueryOperator(
             task_id="load_tbloffers",
             bigquery_conn_id='bigquery_default',
             google_cloud_storage_conn_id='google_cloud_storage_default',
-            bucket='nada-test-profesia-data',
+            bucket='nada-test-xxxxx-data',
             destination_project_dataset_table="nada_transfer1.tbloffers",
             source_objects=["palo/tbloffers2.json"],
             schema_object="palo/schemas/tbloffers2.json",
             source_format='NEWLINE_DELIMITED_JSON',
             create_disposition='CREATE_IF_NEEDED',
             write_disposition='WRITE_TRUNCATE',
-            project_id='test-data-profesia-sk',
+            project_id='test-data-xxxxx-sk',
             dag=dag)
 			
 load.set_upstream(export)
