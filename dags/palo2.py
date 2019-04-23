@@ -57,7 +57,7 @@ start_task = PythonOperator(
 # But you can if you want to
 one_task = PythonOperator(
     task_id="one_task", python_callable=print_stuff, dag=dag,
-    executor_config={"KubernetesExecutor": {"image": "airflow/ci:latest"}}
+    executor_config={"KubernetesExecutor": {"image": "hello-world"}}
 )
 
 # Use the zip binary, which is only found in this special docker image
