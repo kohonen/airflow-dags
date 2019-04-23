@@ -63,7 +63,7 @@ one_task = PythonOperator(
 # Use the zip binary, which is only found in this special docker image
 two_task = PythonOperator(
     task_id="two_task", python_callable=use_zip_binary, dag=dag,
-    executor_config={"KubernetesExecutor": {"image": "airflow/ci_zip:latest"}}
+    executor_config={"KubernetesExecutor": {"image": "hello-world"}}
 )
 
 # Limit resources on this operator/task with node affinity & tolerations
